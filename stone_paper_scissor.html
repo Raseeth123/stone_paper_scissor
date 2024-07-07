@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+            body{
+                background-color: rgb(228, 214, 214);
+            }
+
+            .cot{
+                width:320px;
+                height: auto;
+                margin: 160px auto;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            button{
+                font-size: 48px;
+                padding: 10px;
+                gap: 20px;
+                border-radius: 70px;
+                border: none;
+                background-color: blueviolet;
+                margin-bottom: 40px;
+            }
+
+            h1{
+                color: brown;
+                margin-left: 12px;
+                margin-bottom: 50px;
+            }
+
+
+            .cot1{
+                font-size: 19px;
+                text-align:center;
+                margin:auto;
+                color: brown;
+            }
+
+            h2{
+                font-size: 38px;
+            }
+
+            .win{
+                color: rgb(14, 158, 180);
+            }
+
+            .tie{
+                color: black;
+            }
+
+
+    </style>
+</head>
+<body>
+
+<div class="cot">
+    <h1>Rock - Paper - Scissor</h1>
+    <button id="rock" onclick="playgame('Rock')">👊</button>
+    <button id="paper" onclick="playgame('Paper')">🖐</button>
+    <button id="scissor" onclick="playgame('Scissor')">✌️</button>
+<div class="cot1">
+    <h3 id="player">PLAYER :</h3>
+    <h3 id="computer">COMPUTER :</h3>
+    <h2 id="status"></h2>
+    <h3 id="pscore">Player Score   :</h3>
+    <h3 id="cscore">Computer Score :</h3>
+</div>
+</div> 
+<script>
+        let player=document.getElementById("player")
+        let computer=document.getElementById("computer")
+        let playerscoreup=document.getElementById("pscore")
+        let computerscoreup=document.getElementById("cscore")
+        let statusup=document.getElementById("status")
+        let playerscore=0
+        let computerscore=0
+        let rand=['Rock','Paper','Scissor']
+        function playgame(symbol){
+            let randomnum=Math.floor(Math.random()*3)
+            player.textContent=`PLAYER : ${symbol}`
+            computer.textContent=`COMPUTER : ${rand[randomnum]}`
+            statusup.classList.add("tie")
+            if((symbol=='Rock' && rand[randomnum]=='Scissor')||(symbol=='Paper' && rand[randomnum]=='Rock')||(symbol=='Scissor' && rand[randomnum]=='Paper')){
+                playerscore+=1
+                computerscore=(computerscore>0)?computerscore-1:computerscore
+                statusup.textContent=`YOU WIN!`
+                if(statusup.classList.contains("tie")){
+                    statusup.classList.replace("tie","win")
+                }
+            }
+
+            else if((symbol=='Scissor' && rand[randomnum]=='Rock')||(symbol=='Rock' && rand[randomnum]=='Paper')||(symbol=='Paper' && rand[randomnum]=='Scissor')){
+                playerscore=(playerscore>0)?playerscore-1:playerscore
+                computerscore+=1
+                statusup.textContent=`COMPUTER WIN!`
+                if(statusup.classList.contains("tie")){
+                    statusup.classList.replace("tie","win")
+                }
+            }
+            else{
+                statusup.textContent=`IT'S A TIE!`
+                if(statusup.classList.contains("win")){
+                    statusup.classList.replace("win","tie")
+                }
+            }
+
+            playerscoreup.textContent=`Player Score : ${playerscore}`
+            computerscoreup.textContent=`Computer Score : ${computerscore}`
+        }
+
+
+</script>
+</body>
+</html>
